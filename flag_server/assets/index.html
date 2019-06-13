@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>jQuery��Բ����ת��� - վ���ز�</title>
+<head>
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+<script src="js/jquery-latest.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<link href="css/site.css" type="text/css" rel="stylesheet" />
+<link href="css/vortex.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="js/jquery.vortex.js"></script>
+<link href="css/prettify.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="js/prettify.js"></script>
+<script type="text/javascript">
+	$(window).load(function() {
+
+		$('#vortex').vortex({
+			speed : 60,
+			manualAdvance : true,
+			initialPosition : 270
+		});
+
+		$('#vortex-deep-example').vortex({
+			speed : 200,
+			manualAdvance : false,
+			deepFactor : 0
+		});
+
+	});
+</script>
+</head>
+
+</head>
+
+<body onload="prettyPrint();">
+
+
+	<header class="jumbotron subhead">
+
+		<div class="container">
+</div>
+
+	</header>
+
+	<br />
+<div class="container well">
+	<div class="span5 control-panel">
+		<button id="vortex-start" class="btn" type="button" onclick="$('#vortex').data('vortex').start();">
+		Start</button><br />
+		<button id="vortex-stop" class="btn" type="button" onclick="$('#vortex').data('vortex').stop();">
+		Stop</button><br />
+		<button id="vortex-clockwise" class="btn" type="button" onclick="$('#vortex').data('vortex').setClockwise(true);">
+		Clockwise</button><br />
+		<button id="vortex-counterclockwise" class="btn" type="button" onclick="$('#vortex').data('vortex').setClockwise(false);">
+		Counterclockwise</button><br />
+		<button id="vortex-step-1" class="btn" type="button" onclick="$('#vortex').data('vortex').step(1);">
+		1 step</button><br />
+		<button id="vortex-step-3" class="btn" type="button" onclick="$('#vortex').data('vortex').step(3);">
+		3 step</button><br />
+		<button id="vortex-reset" class="btn" type="button" onclick="$('#vortex').data('vortex').reset();">
+		Reset</button><br />
+		<button id="vortex-speed-10" class="btn" type="button" onclick="$('#vortex').data('vortex').setSpeed(10);">
+		Set speed 10</button><br />
+		<button id="vortex-speed-50" class="btn" type="button" onclick="$('#vortex').data('vortex').setSpeed(50);">
+		Set speed 50</button><br />
+		<button id="vortex-speed-1000" class="btn" type="button" onclick="$('#vortex').data('vortex').setSpeed(1000);">
+		Set speed 1000</button><br />
+	</div>
+	<div class="span6">
+		<!-- 			<hr id="center-line" /> -->
+		<div id="vortex">
+			<div class="square-button first">
+			</div>
+			<div class="square-button">
+			</div>
+			<div class="square-button">
+			</div>
+			<div class="square-button">
+			</div>
+			<div class="square-button">
+			</div>
+			<div class="square-button">
+			</div>
+			<div class="square-button">
+			</div>
+			<div class="square-button">
+			</div>
+			<div class="square-button">
+			</div>
+			<div class="square-button">
+			</div>
+			<div class="square-button">
+			</div>
+		</div>
+	</div>
+</div>
+<div style="text-align:center;clear:both">
+<p>�����������FireFox��Chrome��Safari��Opera�����Ρ��ѹ�. ��֧��IE8��360������֮����</p>
+<p>��Դ��<a href="http://sc.chinaz.com/" target="_blank">վ���ز�</a></p>
+</div>
+</body>
+
+</html>

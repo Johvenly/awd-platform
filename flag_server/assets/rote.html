@@ -1,0 +1,397 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>AWD攻防比赛</title>
+    <link href="assets/css/rote.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="assets/jquery.js"></script>
+</head>
+<body>
+    <canvas id="myCanvas" width="1920" height="800">
+        这个浏览器不支持HTML5元素。
+    </canvas>
+    <div class="sort-box">
+      <div class="boxhead"></div>
+      <div class="title">团队排名</div>
+      <div class="sort-title"><span>排名</span><span>团队名称</span><span>总分</span></div>
+      <ul class="sort-list">
+        <?php foreach($result as $k=>$row){ ?>
+        <li><span class="sort"><?php echo $k; ?></span><span class="name"><?php echo $row['name']; ?></span><span class="score"><?php echo $row['score']; ?></span></li>
+        <?php } ?>
+      </ul>
+      <div class="boxfoot"></div>
+    </div>
+    <div class="con-box">
+      <!-- <button onclick="dropHost(16)">模拟某主机沦陷</button> -->
+      <div class="boxhead"></div>
+      <div class="title">攻击日志</div>
+      <div class="log-title"><span>攻击方</span><span>类型</span><span>防守方</span><span>结果</span></div>
+      <div class="log-list-box">
+        <ul class="log-list"></ul>
+      </div>
+      <div class="boxfoot"></div>
+    </div>
+
+    <script type="text/javascript">
+        var hosts = ["<?php echo implode('", "', $user_list); ?>"];
+        var ball_one_count = 10; //单行排列数量
+        var circle_x = 0;//圆心的X坐标
+        var circle_y = 0;//圆心的Y坐标
+        var circle_a = 300;//椭圆长轴  
+        var circle_b = 120;//椭圆短轴  
+        var now_count = 0;//当前显示小球的个数
+        var balls_array;//用来存储小球信息
+        var angle_change = 0.1;//角度变化
+        var iID;
+        var canvas;//画布
+        var context;//画布环境
+        var points = [];
+        var lines = [];
+        var circles = [];
+        $(function () {
+            var $canvas = $('#myCanvas');
+            canvas = $canvas[0];
+            // canvas.addEventListener('mouseover', mouseOverCanvas, false);//鼠标移到Canvas
+            // canvas.addEventListener('mouseout', mouseOutCanvas, false);//鼠标移出Canvas
+            canvas.addEventListener('click', clickCanvas, false);//鼠标单击Canvas
+            context = canvas.getContext('2d');
+            balls_array = new Array(hosts.length);
+            circle_x = $canvas.width() / 2;
+            circle_y = $canvas.height() / 2;
+            loadBall();
+            runview();
+        });
+        //小球移动
+        function ballMove() {
+            context.clearRect(0, 0, canvas.width, canvas.height);//清空画布内容
+            for (var i = 0; i < balls_array.length; i++) {
+                var ball = balls_array[i];
+                if (ball.angle == 360) {
+                    ball.angle = 0;
+                }
+
+                var circle_l = i >= ball_one_count ? circle_a * 1.5 : circle_a;
+                var circle_s = i >= ball_one_count ? circle_b * 1.8 : circle_b;
+
+                ball.angle = ball.angle + angle_change;//角度
+                var radian = ball.angle * (Math.PI / 180);//弧度
+                ball.x = (circle_x + circle_l * Math.cos(radian)) - ball.w / 2;
+                ball.y = (circle_y + circle_s * Math.sin(radian)) - ball.h / 2;
+                var num = setProp(ball, 0.5, 1);
+                context.globalAlpha = num;
+                context.drawImage(ball.image, ball.x, ball.y, ball.w * num, ball.h * num);
+                context.globalAlpha = 1;
+            }
+        }
+        //加载主机
+        function loadBall() {
+            for (var i = 0; i < hosts.length; i++) {
+                var ball_nums = (i >= ball_one_count && hosts.length % ball_one_count != 0) ? hosts.length % ball_one_count : ball_one_count;
+                if(hosts.length < ball_one_count){
+                  ball_nums = hosts.length;
+                }
+
+                var angle = (i + 1) * (360 / ball_nums);//角度
+                var radian = angle * (Math.PI / 180);//弧度
+
+                var circle_l = i >= ball_one_count ? circle_a * 1.5 : circle_a;
+                var circle_s = i >= ball_one_count ? circle_b * 1.8 : circle_b;
+
+                //初始化图片
+                var img = new Image()
+                img.id = i + 1;
+                img.src = 'assets/computer.png';
+                //存放小球信息
+                var ball = {};
+                ball.id = img.id;
+                ball.w = 82;
+                ball.h = 82;
+                ball.x = (circle_x + circle_l * Math.cos(radian)) - ball.w / 2;
+                ball.y = (circle_y + circle_s * Math.sin(radian)) - ball.h / 2;
+                ball.angle = angle;
+                ball.radian = radian;
+                ball.image = img;
+                balls_array[i] = ball;
+                img.onload = function () {
+                    for (var j = 0; j < balls_array.length; j++) {
+                        if (this.id == balls_array[j].id) {
+                            var item = balls_array[j];
+                            var num = setProp(item, 0.5, 1);
+                            balls_array[j].num = num;
+                            context.globalAlpha = num;//设置图片的透明度
+                            context.drawImage(img, item.x, item.y, item.w * num, item.h * num);
+                            context.globalAlpha = 1;
+
+                            break;
+                        }
+                    }
+                    now_count++;
+                    if (now_count == hosts.length) {//当小球全部加载完成
+                      animate();
+                    }
+                }
+                img.onerror = function () {
+                    alert('图片加载失败！');
+                }
+            }
+        }
+
+        //主机沦陷
+        function dropHost(id){
+          balls_array[id].image.src = "assets/computer_gray.png";
+        }
+
+        //鼠标单击canvas
+        function clickCanvas(e) {
+            p = getEventPosition(e);
+            for (var i = 0; i < balls_array.length; i++) {
+                var ball = balls_array[i];
+                if (p.x >= ball.x && p.x <= (ball.x + ball.w) && p.y >= ball.y && p.y <= (ball.y + ball.h)) {
+                    alert(ball.id);
+                    //window.location.href = 'http://www.baidu.com?id=' + ball.id;
+                    break;
+                }
+            }
+        }
+        //鼠标移到Canvas,小球停止移动
+        function mouseOverCanvas() {
+            clearInterval(iID);
+        }
+        //鼠标移出Canvas,小球移动
+        function mouseOutCanvas() {
+            iID = setInterval(ballMove, 40);
+        }
+        //获取事件对象发生的位置
+        function getEventPosition(ev) {
+            var x, y;
+            if (ev.layerX || ev.layerX == 0) {
+                x = ev.layerX;
+                y = ev.layerY;
+            } else if (ev.offsetX || ev.offsetX == 0) { // Opera   
+                x = ev.offsetX;
+                y = ev.offsetY;
+            }
+            return { x: x, y: y };
+        }
+        //把Y坐标转化为透明度和尺寸属性，范围在n1到n2之间;  
+        function setProp(ball, n1, n2) {
+            return (((ball.y + ball.h / 2 - circle_y) + 2 * circle_b) / circle_b - 1) / 2 * (n2 - n1) + n1;
+        }
+
+        /*************定义一个球类****************/
+        function Ball(b) {
+            this.id = b.id;
+            this.sid = b.sid;
+            this.aid = b.aid;
+            this.x1 = balls_array[this.sid].x + balls_array[this.sid].w * balls_array[this.sid].num / 2;
+            this.y1 = balls_array[this.sid].y + balls_array[this.sid].h * balls_array[this.sid].num / 2;
+            this.x2 = balls_array[this.aid].x + balls_array[this.aid].w * balls_array[this.aid].num / 2;
+            this.y2 = balls_array[this.aid].y + balls_array[this.aid].h * balls_array[this.aid].num / 2;
+            //定义球的圆心位置
+            this.x = this.x1;
+            this.y = this.y1;
+            this.path = 0;
+            this.percent = 0;
+            this.lenper = 3;
+
+            this.ex = this.x1 + (this.x2 - this.x1) * (this.lenper / 100);
+            this.ey = this.y1 + (this.y2 - this.y1) * (this.lenper / 100);
+
+            //定义球的颜色
+            this.color = "#eabd2a";
+
+            //定义速度
+            this.speed = Math.random() * 2;
+
+            this.percent = 0;
+
+            //画的方法
+            this.draw = function() {
+                context.beginPath();
+                context.lineWidth = 1.5;
+                context.strokeStyle = this.color;  
+                context.moveTo(this.x, this.y);    
+                context.lineTo(this.ex, this.ey);   
+                context.stroke(); 
+                context.closePath();
+            }
+        }
+
+        //球原型的方法通过类的原型追加
+        Ball.prototype.move = function(n) {
+            this.x1 = balls_array[this.sid].x + balls_array[this.sid].w * balls_array[this.sid].num / 2;
+            this.y1 = balls_array[this.sid].y + balls_array[this.sid].h * balls_array[this.sid].num / 2;
+            this.x2 = balls_array[this.aid].x + balls_array[this.aid].w * balls_array[this.aid].num / 2;
+            this.y2 = balls_array[this.aid].y + balls_array[this.aid].h * balls_array[this.aid].num / 2;
+            this.path = Math.sqrt((this.x2 - this.x1) * (this.x2 - this.x1) + (this.y2 - this.y1) * (this.y2 - this.y1));
+
+            this.percent = (this.percent + this.lenper) > 100 ? 0 : (this.percent + 1);
+
+            this.x = this.x1 + (this.x2 - this.x1) * (this.percent / 100);
+            this.y = this.y1 + (this.y2 - this.y1) * (this.percent / 100);
+
+            this.ex = this.x1 + (this.x2 - this.x1) * ((this.percent + this.lenper) / 100);
+            this.ey = this.y1 + (this.y2 - this.y1) * ((this.percent + this.lenper) / 100);
+
+            if((this.percent + this.lenper) > 100){
+              var cid = getid();
+              circles[cid] = new Circle(cid, this.aid);
+              this.distory();
+            }
+        }
+
+        Ball.prototype.distory = function(){
+          addlog(hosts[this.sid], hosts[this.aid], 'XSS', '攻击成功');
+          delete points[this.id];
+        }
+
+        /***************定义轨迹线******************/
+        function Line(l){
+          this.sid = l.sid;
+          this.aid = l.aid;
+          this.x1 = balls_array[this.sid].x + balls_array[this.sid].w * balls_array[this.sid].num / 2;
+          this.y1 = balls_array[this.sid].y + balls_array[this.sid].h * balls_array[this.sid].num / 2;
+          this.x2 = balls_array[this.aid].x + balls_array[this.aid].w * balls_array[this.aid].num / 2;
+          this.y2 = balls_array[this.aid].y + balls_array[this.aid].h * balls_array[this.aid].num / 2;
+
+          this.color = "white";
+
+          //画线
+          this.draw = function(){
+            this.x1 = balls_array[this.sid].x + balls_array[this.sid].w * balls_array[this.sid].num / 2;
+            this.y1 = balls_array[this.sid].y + balls_array[this.sid].h * balls_array[this.sid].num / 2;
+            this.x2 = balls_array[this.aid].x + balls_array[this.aid].w * balls_array[this.aid].num / 2;
+            this.y2 = balls_array[this.aid].y + balls_array[this.aid].h * balls_array[this.aid].num / 2;
+            context.beginPath();    
+            context.lineWidth = 1.5;
+            context.strokeStyle = this.color;  
+            context.moveTo(this.x1, this.y1);    
+            context.lineTo(this.x2, this.y2);   
+            context.stroke(); 
+            context.closePath(); 
+          }
+        }
+
+        /*************定义圆形扩散********************/
+        function Circle(id, aid){
+          this.id = id;
+          this.aid = aid;
+          this.color = 'rgba(255,255,50,1)';
+          this.timer = 0;
+          this.radius = 3 * balls_array[this.aid].num;
+
+          this.draw = function(x, y){
+            this.x = balls_array[this.aid].x + balls_array[this.aid].w * balls_array[this.aid].num / 2;
+            this.y = balls_array[this.aid].y + balls_array[this.aid].h * balls_array[this.aid].num / 2;
+            this.num = balls_array[this.aid].num;
+            this.radius += 0.05;
+
+            context.lineWidth = 1.2;
+            context.strokeStyle = this.color;
+            for(var i = 1; i < 4; i++){
+              context.beginPath();
+              context.arc(this.x, this.y, this.radius * i * this.num, 0, Math.PI * 2);
+              if(i == 1){
+                context.fillStyle = this.color;
+                context.fill();
+              }
+              context.closePath();
+              context.stroke();
+            }
+            if(this.timer > 50){
+              this.distory();
+            }
+            this.timer ++;
+          }
+
+          this.distory = function(){
+            delete circles[this.id];
+          }
+        }
+
+        //动画函数
+        function animate(){
+            //清画布
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            //重载主机
+            for (var i = 0; i < balls_array.length; i++) {
+                var ball = balls_array[i];
+                if (ball.angle == 360) {
+                    ball.angle = 0;
+                }
+
+                var circle_l = i >= ball_one_count ? circle_a * 1.5 : circle_a;
+                var circle_s = i >= ball_one_count ? circle_b * 1.8 : circle_b;
+
+                // ball.angle = ball.angle;//角度
+                ball.angle = i >= ball_one_count ? ball.angle + angle_change : ball.angle - angle_change;//角度
+                var radian = ball.angle * (Math.PI / 180);//弧度
+                ball.x = (circle_x + circle_l * Math.cos(radian)) - ball.w / 2;
+                ball.y = (circle_y + circle_s * Math.sin(radian)) - ball.h / 2;
+                var num = setProp(ball, 0.5, 1);
+                ball.num = num;
+                context.globalAlpha = num;
+                context.drawImage(ball.image, ball.x, ball.y, ball.w * num, ball.h * num);
+                context.globalAlpha = 1;
+                balls_array[i] = ball;
+
+                context.font = ball.num * 10 + 'px "微软雅黑"';
+                context.textAlign = "center";
+                context.fillStyle = "#FFF";
+                context.fillText(hosts[i], ball.x + (ball.w + 10) * ball.num / 2, ball.y + (ball.h - 40) * ball.num);
+
+            }
+
+            for(var i in points){
+                points[i].draw();
+                points[i].move();
+            }
+
+            for(var i in circles){
+                circles[i].draw();
+            }
+
+            window.requestAnimationFrame(animate);
+          }
+
+        //添加光线
+        function addpoint(){
+          var id = getid();
+          var sid = Math.ceil(Math.random() * (hosts.length - 1));
+          var aid = Math.ceil(Math.random() * (hosts.length - 1));
+          if(sid == aid){
+            return;
+          }
+          points[id] = new Ball({id: id, sid: sid, aid: aid});
+        }
+
+        //随机函数
+        function randNum(min, max) {
+            return parseInt(Math.random() * (max - min + 1) + min);
+        }
+
+        function getid() {
+            return Date.now();
+        }
+
+
+        var timer;
+        function runview(){
+          $('.con-box').animate({right: 0}, 2000, function(){
+            timer = setInterval("addpoint()", 500);
+          });
+
+          $('.sort-box').animate({left: 0}, 2000, function(){
+
+          });
+        }
+
+        function addlog(sname, aname, type, status){
+          $('.log-list').append('<li><span>' + sname + '</span><span>' + type + '</span><span>' + aname + '</span><span>' + status + '</span></li>');
+          $(".log-list-box").scrollTop($(".log-list")[0].scrollHeight);
+        }
+    </script>
+</body>
+</html>
+

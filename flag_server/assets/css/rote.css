@@ -1,0 +1,128 @@
+body {
+    background: url(../bg.jpg) no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+
+#myCanvas {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.sort-box {
+    position: absolute;
+    top: 0;
+    left: -350px;
+    width: 350px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.36);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sort-box .sort-title {
+    display: flex;
+    justify-content: space-between;
+    height: 32px;
+    line-height: 32px;
+    color: #FFF;
+    font-size: 12px;
+    width: 100%;
+    padding: 0 15px;
+    box-sizing: border-box;
+    margin-top: 15px;
+    background-color: rgba(35, 62, 192, 0.71);
+}
+.sort-box .sort-title span:nth-child(1){flex-grow: 1;text-align: center }
+.sort-box .sort-title span:nth-child(2){flex-grow: 4;text-align: center }
+.sort-box .sort-title span:nth-child(3){flex-grow: 1;text-align: right }
+.sort-box .sort-list{color: #FFF;list-style: none;width: 100%;height: 80%;padding: 0 15px;box-sizing: border-box;font-size: 12px;flex-grow: 1;}
+.sort-box .sort-list li{display: flex;justify-content: space-between;line-height: 28px;}
+.sort-box .sort-list li:nth-child(1) {color: #1ad432;}
+.sort-box .sort-list li:nth-child(2) {color: #f33c3c;}
+.sort-box .sort-list li:nth-child(3) {color: #f5c46a;}
+.sort-box .sort-list span.sort{flex-grow: 1;text-align: center;}
+.sort-box .sort-list span.name{flex-grow: 4;text-align: center;}
+.sort-box .sort-list span.score{flex-grow: 1;text-align: right;}
+
+.con-box {
+    position: absolute;
+    top: 0;
+    right: -350px;
+    width: 350px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.36);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sort-box .title, .con-box .title {
+    color: #FFF;
+    font-size: 16px;
+    line-height: 38px;
+    text-align: center;
+    width: 100%;
+    letter-spacing: 3px;
+    background-color: #000;
+}
+
+.con-box button {
+    border: none;
+    padding: 8px 15px;
+    border-radius: 15px;
+    width: 60%;
+}
+
+.con-box .log-title {
+    display: flex;
+    justify-content: space-between;
+    height: 32px;
+    line-height: 32px;
+    color: #FFF;
+    font-size: 12px;
+    width: 100%;
+    padding: 0 15px;
+    box-sizing: border-box;
+    margin-top: 15px;
+    background-color: rgba(69, 186, 41, 0.71);
+}
+
+.con-box .log-list-box {
+    width: 100%;
+    padding: 0 15px;
+    margin-top: 8px;
+    flex-grow: 1;
+    overflow: hidden;
+    box-sizing: border-box;
+    height: 80%;
+}
+
+.con-box .log-list {
+    color: #FFF;
+    font-size: 12px;
+    list-style: none;
+    width: 100%;
+    padding: 0;
+}
+
+.con-box .log-list li {
+    display: flex;
+    justify-content: space-between;
+    line-height: 28px;
+}
+
+.boxhead{ position:absolute; top: 0; width: 100%; left: 0;}
+.boxhead:before,.boxhead:after{ position:absolute; width: .5rem; height: .5rem;  content: "";border-top: 2px solid #02a6b5; top: 0;}
+.boxfoot{ position:absolute; bottom: 0; width: 100%; left: 0;}
+.boxfoot:before,.boxfoot:after{ position:absolute; width: .5rem; height: .5rem;  content: "";border-bottom: 2px solid #02a6b5; bottom: 0;}
+.boxall:before,.boxhead:before,.boxfoot:before{border-left: 2px solid #02a6b5;left: 0;}
+.boxall:after,.boxhead:after,.boxfoot:after{border-right: 2px solid #02a6b5; right: 0;}
+
+
+
