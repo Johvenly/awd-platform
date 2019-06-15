@@ -16,7 +16,7 @@
       <div class="sort-title"><span>排名</span><span>团队名称</span><span>总分</span></div>
       <ul class="sort-list">
         <?php foreach($result as $k=>$row){ ?>
-        <li><span class="sort"><?php echo $k; ?></span><span class="name"><?php echo $row['name']; ?></span><span class="score"><?php echo $row['score']; ?></span></li>
+        <li><span class="sort"><?php echo $k + 1; ?></span><span class="name"><?php echo $row['name']; ?></span><span class="score"><?php echo $row['score']; ?></span></li>
         <?php } ?>
       </ul>
       <div class="boxfoot"></div>
@@ -25,16 +25,22 @@
       <!-- <button onclick="dropHost(16)">模拟某主机沦陷</button> -->
       <div class="boxhead"></div>
       <div class="title">攻击日志</div>
-      <div class="log-title"><span>攻击方</span><span>类型</span><span>防守方</span><span>结果</span></div>
+      <div class="log-title"><span>攻击方</span><span>防守方</span><span>时间</span><span>结果</span></div>
       <div class="log-list-box">
-        <ul class="log-list"></ul>
+        <ul class="log-list">
+            <?php foreach($logarr as $row){ 
+              $row = json_decode($row, true);
+            ?>
+            <li><span><?php echo $row['aname']; ?></span><span><?php echo $row['vname']; ?></span><span><?php echo $row['time']; ?></span><span>攻击成功</span></li>
+            <?php } ?>
+        </ul>
       </div>
       <div class="boxfoot"></div>
     </div>
 
     <script type="text/javascript">
         var hosts = ["<?php echo implode('", "', $user_list); ?>"];
-        var ball_one_count = 10; //单行排列数量
+        var ball_one_count = Math.ceil(hosts.length / 2); //单行排列数量
         var circle_x = 0;//圆心的X坐标
         var circle_y = 0;//圆心的Y坐标
         var circle_a = 300;//椭圆长轴  
@@ -183,6 +189,7 @@
             this.id = b.id;
             this.sid = b.sid;
             this.aid = b.aid;
+            this.time = b.time;
             this.x1 = balls_array[this.sid].x + balls_array[this.sid].w * balls_array[this.sid].num / 2;
             this.y1 = balls_array[this.sid].y + balls_array[this.sid].h * balls_array[this.sid].num / 2;
             this.x2 = balls_array[this.aid].x + balls_array[this.aid].w * balls_array[this.aid].num / 2;
@@ -241,7 +248,7 @@
         }
 
         Ball.prototype.distory = function(){
-          addlog(hosts[this.sid], hosts[this.aid], 'XSS', '攻击成功');
+          addlog(hosts[this.sid], hosts[this.aid], this.time, '攻击成功');
           delete points[this.id];
         }
 
@@ -357,13 +364,15 @@
 
         //添加光线
         function addpoint(){
-          var id = getid();
-          var sid = Math.ceil(Math.random() * (hosts.length - 1));
-          var aid = Math.ceil(Math.random() * (hosts.length - 1));
-          if(sid == aid){
-            return;
-          }
-          points[id] = new Ball({id: id, sid: sid, aid: aid});
+          $.post('?post=listenlog', function(result){
+            if(result != 'error'){
+              for(var i = 0; i < result.length; i++){
+                var id = getid();
+                points[id] = new Ball({id: id, sid: result[i]['aid'], aid: result[i]['vid'], time: result[i]['time']});
+                console.log(result[i]);
+              }
+            }
+          }, 'json');
         }
 
         //随机函数
@@ -372,14 +381,14 @@
         }
 
         function getid() {
-            return Date.now();
+            return Date.now() + Math.ceil(Math.random() * 100);
         }
 
 
         var timer;
         function runview(){
           $('.con-box').animate({right: 0}, 2000, function(){
-            timer = setInterval("addpoint()", 500);
+            timer = setInterval("addpoint()", 1000);
           });
 
           $('.sort-box').animate({left: 0}, 2000, function(){
@@ -387,8 +396,8 @@
           });
         }
 
-        function addlog(sname, aname, type, status){
-          $('.log-list').append('<li><span>' + sname + '</span><span>' + type + '</span><span>' + aname + '</span><span>' + status + '</span></li>');
+        function addlog(sname, aname, time, status){
+          $('.log-list').append('<li><span>' + sname + '</span><span>' + aname + '</span><span>' + time + '</span><span>' + status + '</span></li>');
           $(".log-list-box").scrollTop($(".log-list")[0].scrollHeight);
         }
     </script>
