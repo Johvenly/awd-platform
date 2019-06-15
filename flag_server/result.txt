@@ -1,4 +1,0 @@
-team5 => team13
-team3 => team1
-team3 => team14
-team8 => team5

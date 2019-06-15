@@ -55,6 +55,9 @@ def generate_flag_run_sh(team_number):
 cd /var/www/html
 service apache2 stop
 service apache2 start
+service mysql start
+mysqladmin -uroot -proot password yeecent
+mysql -uroot -pyeecent -e "source /var/www/html/xxxadmin.sql"
 python new.py %d
 /bin/bash''' % team_number
 	return content
