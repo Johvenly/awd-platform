@@ -50,6 +50,8 @@ if(isset($_REQUEST['token'])){
     check_time($attack_id,$victim_id);
     $score = implode('|',$scores);
     file_put_contents('result.txt',$user_list[$attack_id] . ' => ' . $user_list[$victim_id]."\n", FILE_APPEND);
+    file_put_contents('logs.txt', json_encode(['aid'=> $attack_id, 'vid'=> $victim_id, 'aname'=> $user_list[$attack_id], 'vname'=>$user_list[$victim_id], 'time'=> date('Y-m-d H:i:s')])."\n", FILE_APPEND);
+    file_put_contents('log_temp.txt', json_encode(['aid'=> $attack_id, 'vid'=> $victim_id, 'time'=> date('Y-m-d H:i:s')])."\n", FILE_APPEND);
     $cmd = 'curl "127.0.0.1/score.php?key='.$key.'&write=1&score='.$score.'"';
     system($cmd);
     update_time($attack_id,$victim_id);
