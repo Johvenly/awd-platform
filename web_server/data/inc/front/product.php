@@ -9,7 +9,7 @@ include('data/inc/front/header.php');
     <nav id="w0" class="navbar-inverse navbar-fixed-top navbar" role="navigation"><div class="container"><div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#w0-collapse"><span class="sr-only">Toggle navigation</span>
 <span class="icon-bar"></span>
 <span class="icon-bar"></span>
-<span class="icon-bar"></span></button><a class="navbar-brand" href="">EasyCMS</a></div><div id="w0-collapse" class="collapse navbar-collapse"><ul id="w1" class="navbar-nav navbar-right nav"><li><a href="index.php?file=index">首页</a></li>
+<span class="icon-bar"></span></button><a class="navbar-brand" href="">YeeCMS</a></div><div id="w0-collapse" class="collapse navbar-collapse"><ul id="w1" class="navbar-nav navbar-right nav"><li><a href="index.php?file=index">首页</a></li>
 <li><a href="index.php?file=about&id=1">关于我们</a></li>
 <li class="active"><a href="index.php?file=product">产品中心</a></li>
 <li><a href="index.php?file=news">新闻中心</a></li>

@@ -28,7 +28,7 @@ defined('IN_CMS') or exit('Access denied!'); ?><!DOCTYPE html PUBLIC "-//W3C//DT
 		<div class="footer">
 			<?php theme_area('footer'); ?>
 			>> <a href="<?php echo SITE_URL; ?>/login.php">admin</a>
-			<br />powered by <a href="">HeartSky&anmp;c014</a>
+			<br />powered by <a href="">Yeecent Team&anmp;c014</a>
 		</div>
 	</div>
 </div>

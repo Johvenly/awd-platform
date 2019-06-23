@@ -8,7 +8,7 @@ header('Content-Type:text/html;charset=utf-8');
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo LANG; ?>" lang="<?php echo LANG; ?>">
 <head>
-<title>EasyCMS <?php echo VERSION; ?> - <?php echo $titelkop; ?></title>
+<title>YeeCMS <?php echo VERSION; ?> - <?php echo $titelkop; ?></title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <?php
 if (DIRECTION_RTL) {
@@ -35,7 +35,7 @@ function refresh() {
 
 <body>
 <div id="menuheader">
-	<h1>EasyCMS</h1>
+	<h1>YeeCMS</h1>
 	<ul id="menu2">
 		<li><?php echo $titelkop; ?></li>
 	</ul>

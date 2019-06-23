@@ -70,7 +70,7 @@ function get_pagetitle() {
  *
  * @since 4.6
  * @package site
- * @param bool $reset_css If set to true, includes reset CSS-file provided by EasyCMS. Defaults to false.
+ * @param bool $reset_css If set to true, includes reset CSS-file provided by YeeCMS. Defaults to false.
  */
 function theme_meta($reset_css = false) {
 	//Get page-info (for meta-information)
@@ -95,7 +95,7 @@ function theme_meta($reset_css = false) {
 		$cssfile = SITE_URL.'/data/themes/'.$page_theme.'/'.$stylefile.'.css';
 
 	echo '<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />'."\n";
-	echo '<meta name="generator" content="EasyCMS '.VERSION.'" />'."\n";
+	echo '<meta name="generator" content="YeeCMS '.VERSION.'" />'."\n";
 	echo '<title>'.PAGE_TITLE.' - '.SITE_TITLE.'</title>'."\n";
 	if ($reset_css)
 		echo '<link href="'.SITE_URL.'/data/reset.css" rel="stylesheet" type="text/css" />'."\n";
@@ -255,7 +255,7 @@ function theme_content() {
 			run_hook('theme_content', array(&$content));
 
 			//Check for module tags in content
-			$regex = '/\{EasyCMS (.*?)\}/';
+			$regex = '/\{YeeCMS (.*?)\}/';
 			if (preg_match($regex, $content)) {
 				//Split content in chunks.
 				$content = preg_split($regex, $content, null, PREG_SPLIT_DELIM_CAPTURE);

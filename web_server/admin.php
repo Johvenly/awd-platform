@@ -28,8 +28,8 @@ else {
 
 	//Then check if we are properly logged in.
 	require_once ('data/settings/token.php');
-	if (!isset($_SESSION[$token]) || ($_SESSION[$token] != 'EasyCMS_loggedin')) {
-		$_SESSION['EasyCMS_before'] = 'admin.php?'.$_SERVER['QUERY_STRING'];
+	if (!isset($_SESSION[$token]) || ($_SESSION[$token] != 'YeeCMS_loggedin')) {
+		$_SESSION['YeeCMS_before'] = 'admin.php?'.$_SERVER['QUERY_STRING'];
 		$titelkop = $lang['login']['not'];
 		include_once ('data/inc/header2.php');
 		show_error($lang['login']['not_message'], 2);

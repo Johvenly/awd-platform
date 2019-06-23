@@ -8,7 +8,7 @@ $language = 'English';
 //General
 $lang['general']['404']				= '404: not found';
 $lang['general']['not_found']		= 'This page could not be found.';
-$lang['general']['copyright']		= 'EasyCMS is available under the terms of the <a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU General Public License</a>.';
+$lang['general']['copyright']		= 'YeeCMS is available under the terms of the <a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU General Public License</a>.';
 $lang['general']['save']			= 'Save';
 $lang['general']['save_exit']		= 'Save and Exit';
 $lang['general']['cancel']			= 'Cancel';
@@ -51,8 +51,8 @@ $lang['login']['log_out']           = 'log out';
 
 //Install
 $lang['install']['not']          = 'not installed';
-$lang['install']['not_message']  = 'EasyCMS hasn\'t been installed yet. A moment, please...';
-$lang['install']['already']      = 'EasyCMS has already been installed. A moment, please...';
+$lang['install']['not_message']  = 'YeeCMS hasn\'t been installed yet. A moment, please...';
+$lang['install']['already']      = 'YeeCMS has already been installed. A moment, please...';
 $lang['install']['title']        = 'installation';
 $lang['install']['welcome']      = 'Welcome! Before you can setup your new website, you have to install .';
 $lang['install']['start']        = 'Start the installation...';
@@ -64,12 +64,12 @@ $lang['install']['good']         = 'Good';
 $lang['install']['refresh']      = 'Refresh';
 $lang['install']['proceed']      = 'Proceed...';
 $lang['install']['homepage']     = 'Here you can edit the homepage of your website. Choose a title and edit the contents.';
-$lang['install']['success']      = 'EasyCMS has been successfully installed!';
+$lang['install']['success']      = 'YeeCMS has been successfully installed!';
 $lang['install']['manage']       = 'manage your website';
 $lang['install']['general_info'] = 'Please give some general information about you and your website.';
 
 //Update
-$lang['update']['up_to_date'] = 'EasyCMS is up-to-date';
+$lang['update']['up_to_date'] = 'YeeCMS is up-to-date';
 $lang['update']['available']  = 'update available';
 $lang['update']['urgent']     = '<strong>urgent</strong> update available';
 $lang['update']['failed']     = 'update check failed';
@@ -92,28 +92,28 @@ $lang['trashcan']['same_page_name'] = 'The page could not be restored from the t
 
 //Start
 $lang['start']['title']   = 'start';
-$lang['start']['welcome'] = 'Welcome to the administration center of EasyCMS.';
+$lang['start']['welcome'] = 'Welcome to the administration center of YeeCMS.';
 $lang['start']['manage']  = 'Here you can manage your website. Choose a link in the menu at the top of your screen.';
 $lang['start']['more']    = 'more...';
 $lang['start']['website'] = 'take a look at your website';
 $lang['start']['result']  = 'take a look at the result';
-$lang['start']['people']  = 'all the people who helped develop EasyCMS';
+$lang['start']['people']  = 'all the people who helped develop YeeCMS';
 $lang['start']['help']    = 'need help?';
 $lang['start']['love']    = 'we\'d love to help you';
 
 //Credits
 $lang['credits']['title']          = 'credits';
-$lang['credits']['message']        = 'Our thanks goes to all the following people, for helping in the development of EasyCMS.';
+$lang['credits']['message']        = 'Our thanks goes to all the following people, for helping in the development of YeeCMS.';
 $lang['credits']['project_leader'] = 'project leader';
 $lang['credits']['developers']     = 'main developers';
 $lang['credits']['contributions']  = 'contributions';
 $lang['credits']['translation']    = 'translation';
 $lang['credits']['more']           = 'more thanks';
-$lang['credits']['tinymce']        = 'for making the excellent TinyMCE-editor used in EasyCMS';
+$lang['credits']['tinymce']        = 'for making the excellent TinyMCE-editor used in YeeCMS';
 $lang['credits']['maxgtar']        = 'for making MaxgTar, used in the automatic theme and module installer';
-$lang['credits']['lytebox']        = 'for developing LyteBox, used in EasyCMS to serve the images in your albums with flair';
-$lang['credits']['tango']          = 'for designing the wonderful icons used in the EasyCMS administration center';
-$lang['credits']['slik']           = 'for designing the "Silk" icons, also used in EasyCMS';
+$lang['credits']['lytebox']        = 'for developing LyteBox, used in YeeCMS to serve the images in your albums with flair';
+$lang['credits']['tango']          = 'for designing the wonderful icons used in the YeeCMS administration center';
+$lang['credits']['slik']           = 'for designing the "Silk" icons, also used in YeeCMS';
 
 //Page
 $lang['page']['title']        = 'pages';
@@ -168,12 +168,12 @@ $lang['modules']['message'] = 'Pluck has a variety of modules available, which y
 
 //Options
 $lang['options']['title']               = 'options';
-$lang['options']['message']             = 'Here you can configure EasyCMS so it suits your wishes and taste.';
+$lang['options']['message']             = 'Here you can configure YeeCMS so it suits your wishes and taste.';
 $lang['options']['settings_descr']      = 'change general settings like the title of your website and your email address';
 $lang['options']['modules_descr']       = 'manage modules and include them in your website';
 $lang['options']['modules_sett_descr']  = 'change module configuration settings';
 $lang['options']['themes_descr']        = 'change the look and feel of your website';
-$lang['options']['lang_descr']          = 'choose the language that will be used by EasyCMS';
+$lang['options']['lang_descr']          = 'choose the language that will be used by YeeCMS';
 $lang['options']['pass_descr']          = 'it is a good idea to change your password regularly';
 
 //Settings
@@ -197,7 +197,7 @@ $lang['modules_manage']['uninstall_confirm'] = 'Are you sure you want to uninsta
 $lang['modules_manage']['version']           = 'version';
 $lang['modules_manage']['author']            = 'author';
 $lang['modules_manage']['website']           = 'website';
-$lang['modules_manage']['not_compatible']    = 'This module is not compatible with your version of EasyCMS, and has been disabled.';
+$lang['modules_manage']['not_compatible']    = 'This module is not compatible with your version of YeeCMS, and has been disabled.';
 
 //Modules_settings
 $lang['modules_settings']['title']             = 'module settings';
@@ -234,12 +234,12 @@ $lang['theme_install']['too_big']       = 'The theme file is too big; 1MB is the
 
 //Language
 $lang['language']['title']  = 'language settings';
-$lang['language']['choose'] = 'Choose the language that will be used by EasyCMS.';
+$lang['language']['choose'] = 'Choose the language that will be used by YeeCMS.';
 $lang['language']['saved']  = 'The language settings have been saved.';
 
 //Changepass
 $lang['changepass']['title']       = 'change password';
-$lang['changepass']['message']     = 'Here you can change the password you use to login to the <i>EasyCMS</i> administration center. It\'s a good idea to change your password regularly.';
+$lang['changepass']['message']     = 'Here you can change the password you use to login to the <i>YeeCMS</i> administration center. It\'s a good idea to change your password regularly.';
 $lang['changepass']['old']         = 'old password';
 $lang['changepass']['new']         = 'new password';
 $lang['changepass']['repeat']      = 'repeat new password';

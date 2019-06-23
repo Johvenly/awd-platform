@@ -12,7 +12,7 @@ require_once ('data/inc/functions.all.php');
 //Include variables.
 require_once ('data/inc/variables.all.php');
 
-//Check if we've installed EasyCMS.
+//Check if we've installed YeeCMS.
 if (!file_exists('data/settings/install.dat')) {
 	$titelkop = $lang['install']['not'];
 	include_once ('data/inc/header2.php');
@@ -21,14 +21,14 @@ if (!file_exists('data/settings/install.dat')) {
 	include_once('data/inc/footer.php');
 }
 
-//If EasyCMS is installed:
+//If YeeCMS is installed:
 else {
 	require_once ('data/settings/pass.php');
 
 	//Check if we're already logged in. First, get the token.
 	require_once ('data/settings/token.php');
 
-	if (isset($_SESSION[$token]) && ($_SESSION[$token] == 'EasyCMS_loggedin')) {
+	if (isset($_SESSION[$token]) && ($_SESSION[$token] == 'YeeCMS_loggedin')) {
 		header('Location: admin.php');
 		exit;
 	}
@@ -63,7 +63,7 @@ else {
 
 		//If password is correct, save session-cookie.
 		if (($pass == $ww) && (!isset($login_error))) {
-			$_SESSION[$token] = 'EasyCMS_loggedin';
+			$_SESSION[$token] = 'YeeCMS_loggedin';
 
 			//Delete loginattempt file, if it exists.
 			if (file_exists(LOGIN_ATTEMPT_FILE))
@@ -71,8 +71,8 @@ else {
 
 			//Display success message.
 			show_error($lang['login']['correct'], 3);
-			if (isset($_SESSION['EasyCMS_before']))
-				redirect($_SESSION['EasyCMS_before'], 1);
+			if (isset($_SESSION['YeeCMS_before']))
+				redirect($_SESSION['YeeCMS_before'], 1);
 			else
 				redirect('admin.php?action=start', 1);
 			include_once ('data/inc/footer.php');

@@ -12,7 +12,7 @@ if (file_exists('data/settings/update_lastcheck.php'))
 //We want to check for updates if:
 //1: Updatecheckfile doesn't exist.
 //2: Updatecheckfile exists, but last check was not today.
-//3: Updatecheckfile exists, but the last checked EasyCMS version is not the same as the current.
+//3: Updatecheckfile exists, but the last checked YeeCMS version is not the same as the current.
 if (!file_exists('data/settings/update_lastcheck.php') || (file_exists('data/settings/update_lastcheck.php') && $lastcheck != $dayofyear) || (file_exists('data/settings/update_lastcheck.php') && $cms_version != VERSION)) {
 	//Iniate CURL to fetch update-info,
 	//but only if CURL-extension is loaded.

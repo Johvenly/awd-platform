@@ -66,7 +66,7 @@ function run_hook($name, $par = null) {
 }
 
 /**
- * Check if module is compatible with the current version of EasyCMS.
+ * Check if module is compatible with the current version of YeeCMS.
  *
  * @since 4.6
  * @package all
@@ -76,7 +76,7 @@ function run_hook($name, $par = null) {
 function module_is_compatible($module) {
 	//Include module information.
 	if (function_exists($module.'_info')) {
-		//NOTE: If EasyCMS is an alpha, beta or dev version, it will always be compatible.
+		//NOTE: If YeeCMS is an alpha, beta or dev version, it will always be compatible.
 		if (preg_match('/(alpha|beta|dev)/', VERSION)) return true;
 
 		$module_info = call_user_func($module.'_info');
@@ -110,7 +110,7 @@ function module_is_included_in_page($module, $page_seoname) {
 	if (is_file(PAGE_DIR.'/'.$page_filename)) {
 		$content = '';
 		include(PAGE_DIR.'/'.$page_filename);
-		if (preg_match('/\{EasyCMS show_module\('.$module.'(,[^)]*)?\)\}/', $content)) {
+		if (preg_match('/\{YeeCMS show_module\('.$module.'(,[^)]*)?\)\}/', $content)) {
 			return true;
 		}
 	}

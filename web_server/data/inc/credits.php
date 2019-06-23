@@ -5,7 +5,7 @@ defined('IN_CMS') or exit('Access denied!');
 
 <p>
 	<span class="kop2"><?php echo $lang['credits']['developers']; ?></span>
-	Thanks HeartSky and c014
+	Thanks Yeecent Team
 
 </p>
 <?php

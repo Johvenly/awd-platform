@@ -1,6 +1,6 @@
 <footer class="footer">
     <div class="container">
-        <p class="pull-right">Powered by HeartSky&amp;c014</p>
+        <p class="pull-right">Powered by Yeecent Team</p>
     </div>
 </footer>
 

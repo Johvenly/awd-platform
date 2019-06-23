@@ -7,7 +7,7 @@ define('IN_CMS', true);
 //Then start session support.
 session_start();
 
-//Check if EasyCMS has been installed. If not, redirect.
+//Check if YeeCMS has been installed. If not, redirect.
 if (!file_exists('data/settings/install.dat')) {
 	header('Location: install.php');
 	exit;

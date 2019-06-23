@@ -71,7 +71,7 @@ function tinymce_admin_head_main() {
 	var module = id.selectedIndex;
 	var code = id.options[module].value;
 
-	tinyMCE.execCommand('mceInsertContent', false, '<div class="module_' + code.replace(' ', '_') + '">{EasyCMS show_module(' + code + ')}</div>');
+	tinyMCE.execCommand('mceInsertContent', false, '<div class="module_' + code.replace(' ', '_') + '">{YeeCMS show_module(' + code + ')}</div>');
 	}
 	</script>
 	<?php

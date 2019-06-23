@@ -457,7 +457,7 @@ function check_writable($file) {
 }
 
 /**
- * Saves an empty file ('data/settings/install.dat') to indicate that EasyCMS has been sucessfully installed. For use in installer.
+ * Saves an empty file ('data/settings/install.dat') to indicate that YeeCMS has been sucessfully installed. For use in installer.
  *
  * @since 4.6
  * @package admin

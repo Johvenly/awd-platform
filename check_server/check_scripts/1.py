@@ -87,7 +87,7 @@ class check():
 
     def test_check(self):
 	res = http('get',host,port,'/index.php?file=more&time=%s'%str(my_time),'',headers)
-	if 'Powered by HeartSky' in res:
+	if 'Powered by Yeecent Team' in res:
 	    return True
 	if debug:
 	    print "[fail!] test_check_fail"

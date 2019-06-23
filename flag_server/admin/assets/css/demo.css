@@ -2,6 +2,7 @@
 *
 *
 */
+ul{list-style: none; padding: 0;}
 
 :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
     color: #CECFD2; opacity:1; 

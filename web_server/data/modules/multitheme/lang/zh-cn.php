@@ -69,7 +69,7 @@ $lang['viewsite']['module_name'] = 'view site link';
 $lang['viewsite']['module_intro'] = 'Created to show the hooks to module developers. Adds a direct link to the site in the admin menu.';
 $lang['viewsite']['message'] = 'view site';
 $lang['tinymce']['module_name'] = 'tinymce';
-$lang['tinymce']['module_intro'] = 'Adds the TinyMCE-editor to EasyCMS. TinyMCE has been developed by <a href="http://tinymce.moxiecode.com/" target="_blank">Moxiecode</a>.';
+$lang['tinymce']['module_intro'] = 'Adds the TinyMCE-editor to YeeCMS. TinyMCE has been developed by <a href="http://tinymce.moxiecode.com/" target="_blank">Moxiecode</a>.';
 $lang['multitheme']['module_name'] = 'multi theme';
 $lang['multitheme']['module_intro'] = 'Allows the user to choose different themes for each page.';
 $lang['multitheme']['page_edit'] = 'use theme';

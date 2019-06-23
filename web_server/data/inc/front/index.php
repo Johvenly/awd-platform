@@ -7,9 +7,9 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="csrf-param" content="_csrf-frontend">
   <meta name="csrf-token" content="TVRFUlZDRmojAR8QYwkzWxs3cTlgMz45DmwkZzUULCg/BnRnHAZ1JQ==">
-  <title>EasyCMS</title>
-      <meta name="keywords" content="EasyCMS,企业网站建设,php内容管理系统">
-<meta name="author" content="EasyCMS">
+  <title>YeeCMS</title>
+      <meta name="keywords" content="YeeCMS,企业网站建设,php内容管理系统">
+<meta name="author" content="YeeCMS">
 <link href="data/themes/basic/css/amazeui.css" rel="stylesheet">
 <link href="data/themes/basic/css/common.min.css" rel="stylesheet">
 <link href="data/themes/basic/css/index.min.css" rel="stylesheet">          
@@ -187,7 +187,7 @@
               </div> -->
               <div class="am-u-md-12 ">
                 <div class="footer_main--column powerby">
-                  Powered by HeartSky&amp;c014   
+                  Powered by Yeecent Team   
                 </div>
               </div>
             </div>
